@@ -39,9 +39,9 @@ export function Footer() {
         <div className="mt-10 pt-6 border-t flex flex-col sm:flex-row justify-between items-center gap-4 text-xs opacity-50" style={{ borderColor: "rgba(245,240,235,0.2)" }}>
           <p>&copy; {new Date().getFullYear()} Fleuriste Paris. Tous droits réservés.</p>
           <div className="flex gap-4">
-            <Link href="#">Mentions légales</Link>
-            <Link href="#">Politique de confidentialité</Link>
-            <Link href="#">CGV</Link>
+            <Link href="/mentions-legales">Mentions légales</Link>
+            <Link href="/mentions-legales">Politique de confidentialité</Link>
+            <Link href="/mentions-legales">CGV</Link>
           </div>
         </div>
       </div>

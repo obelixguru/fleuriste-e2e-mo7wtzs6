@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { products } from "@/data/products";
+import { products } from "@/lib/products";
 import type { Metadata } from "next";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -31,17 +31,7 @@ export default async function ProductPage({ params }: Props) {
   if (!product) notFound();
 
   return (
-    <>
-      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 backdrop-blur-md" style={{ background: "rgba(245,240,235,0.85)" }}>
-        <Link href="/" className="text-2xl" style={{ fontFamily: "var(--font-title)" }}>Fleuriste E2E</Link>
-        <div className="hidden md:flex items-center gap-8 text-sm tracking-wide uppercase" style={{ fontFamily: "var(--font-ui)" }}>
-          <Link href="/catalogue" className="hover:opacity-60 transition-opacity">Catalogue</Link>
-          <Link href="/a-propos" className="hover:opacity-60 transition-opacity">À propos</Link>
-        </div>
-        <Link href="/checkout" className="text-sm">🛒</Link>
-      </nav>
-
-      <main className="max-w-6xl mx-auto px-6 py-12">
+    <div className="max-w-6xl mx-auto px-6 py-12">
         {/* Breadcrumb */}
         <nav className="text-xs mb-8" style={{ color: "var(--color-terre)" }}>
           <Link href="/" className="hover:opacity-60">Accueil</Link>
@@ -124,7 +114,6 @@ export default async function ProductPage({ params }: Props) {
             </div>
           </div>
         </div>
-      </main>
-    </>
+    </div>
   );
 }
