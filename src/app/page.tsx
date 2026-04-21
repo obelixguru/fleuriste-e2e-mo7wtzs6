@@ -1,13 +1,9 @@
 import { Star, Truck, Leaf, Flower2, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { products } from "@/lib/products";
 
-/* ── Data ─────────────────────────────────────────────── */
-const bestsellers = [
-  { name: "Éclat de Rose", price: 89, slug: "eclat-de-rose", img: "/products/roses.jpg" },
-  { name: "Jardin Sauvage", price: 65, slug: "jardin-sauvage", img: "/products/sauvage.jpg" },
-  { name: "Pureté Blanche", price: 79, slug: "purete-blanche", img: "/products/blanche.jpg" },
-  { name: "Soleil de Provence", price: 72, slug: "soleil-de-provence", img: "/products/provence.jpg" },
-];
+const bestsellers = products.filter((p) => p.category === "Bouquets").slice(0, 4);
 
 const occasions = [
   "Anniversaire", "Mariage", "Remerciement", "Deuil", "Naissance", "Entreprise", "Surprise",
@@ -27,25 +23,9 @@ const faqs = [
   { q: "Quels sont vos moyens de paiement ?", a: "Carte bancaire, Apple Pay, Google Pay. Paiement 100% sécurisé via Stripe." },
 ];
 
-/* ── Page ──────────────────────────────────────────────── */
 export default function Home() {
   return (
     <>
-      {/* Nav */}
-      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 backdrop-blur-md" style={{ background: "rgba(245,240,235,0.85)" }}>
-        <Link href="/" className="text-2xl" style={{ fontFamily: "var(--font-title)" }}>
-          Fleuriste E2E
-        </Link>
-        <div className="hidden md:flex items-center gap-8 text-sm tracking-wide uppercase" style={{ fontFamily: "var(--font-ui)" }}>
-          <Link href="/catalogue" className="hover:opacity-60 transition-opacity">Catalogue</Link>
-          <Link href="/catalogue?cat=occasions" className="hover:opacity-60 transition-opacity">Occasions</Link>
-          <Link href="/a-propos" className="hover:opacity-60 transition-opacity">À propos</Link>
-        </div>
-        <Link href="/panier" className="relative flex items-center gap-1 text-sm">
-          🛒 <span className="sr-only">Panier</span>
-        </Link>
-      </nav>
-
       {/* Hero */}
       <section className="relative flex items-center justify-center min-h-[85vh] px-6 text-center" style={{ background: "linear-gradient(180deg, var(--color-creme) 0%, #ede6dd 100%)" }}>
         <div className="max-w-2xl">
@@ -64,7 +44,7 @@ export default function Home() {
               Découvrir la collection
             </Link>
             <Link
-              href="/catalogue?cat=abonnements"
+              href="/abonnements"
               className="inline-flex items-center px-8 py-4 text-sm uppercase tracking-widest border transition-all"
               style={{ borderColor: "var(--color-terre)", color: "var(--color-terre)", fontFamily: "var(--font-ui)" }}
             >
@@ -89,9 +69,8 @@ export default function Home() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {bestsellers.map((p) => (
             <Link key={p.slug} href={`/catalogue/${p.slug}`} className="group">
-              <div className="aspect-[3/4] rounded-lg mb-3 overflow-hidden" style={{ background: "var(--color-dore)", opacity: 0.3 }}>
-                {/* placeholder — replace with real images */}
-                <div className="w-full h-full flex items-center justify-center text-4xl">🌸</div>
+              <div className="aspect-[3/4] rounded-lg mb-3 overflow-hidden relative">
+                <Image src={p.image} alt={p.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 50vw, 25vw" />
               </div>
               <h3 className="text-base font-normal" style={{ fontFamily: "var(--font-title)" }}>{p.name}</h3>
               <p className="text-sm" style={{ color: "var(--color-terre)" }}>{p.price} €</p>
@@ -148,36 +127,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="px-6 py-12" style={{ background: "var(--color-noir)", color: "var(--color-creme)" }}>
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-sm">
-          <div>
-            <h3 className="text-lg mb-4" style={{ fontFamily: "var(--font-title)" }}>Fleuriste E2E</h3>
-            <p style={{ color: "var(--color-dore)" }}>L&apos;art floral parisien, livré chez vous.</p>
-          </div>
-          <div>
-            <h4 className="uppercase text-xs tracking-widest mb-4" style={{ color: "var(--color-dore)" }}>Navigation</h4>
-            <ul className="space-y-2">
-              <li><Link href="/catalogue" className="hover:opacity-60 transition-opacity">Catalogue</Link></li>
-              <li><Link href="/a-propos" className="hover:opacity-60 transition-opacity">À propos</Link></li>
-              <li><Link href="/contact" className="hover:opacity-60 transition-opacity">Contact</Link></li>
-              <li><Link href="/blog" className="hover:opacity-60 transition-opacity">Blog</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="uppercase text-xs tracking-widest mb-4" style={{ color: "var(--color-dore)" }}>Informations</h4>
-            <ul className="space-y-2">
-              <li><Link href="/mentions-legales" className="hover:opacity-60 transition-opacity">Mentions légales</Link></li>
-              <li><Link href="/cgv" className="hover:opacity-60 transition-opacity">CGV</Link></li>
-              <li><Link href="/confidentialite" className="hover:opacity-60 transition-opacity">Politique de confidentialité</Link></li>
-            </ul>
-          </div>
-        </div>
-        <div className="max-w-6xl mx-auto mt-8 pt-8 border-t text-xs text-center" style={{ borderColor: "rgba(212,175,140,0.3)", color: "var(--color-dore)" }}>
-          © 2026 Fleuriste E2E — Tous droits réservés
-        </div>
-      </footer>
     </>
   );
 }

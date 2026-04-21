@@ -9,16 +9,7 @@ export const metadata: Metadata = {
 export default function APropos() {
   return (
     <>
-      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 backdrop-blur-md" style={{ background: "rgba(245,240,235,0.85)" }}>
-        <Link href="/" className="text-2xl" style={{ fontFamily: "var(--font-title)" }}>Fleuriste E2E</Link>
-        <div className="hidden md:flex items-center gap-8 text-sm tracking-wide uppercase" style={{ fontFamily: "var(--font-ui)" }}>
-          <Link href="/catalogue" className="hover:opacity-60 transition-opacity">Catalogue</Link>
-          <Link href="/a-propos" className="hover:opacity-60 transition-opacity">À propos</Link>
-          <Link href="/contact" className="hover:opacity-60 transition-opacity">Contact</Link>
-        </div>
-      </nav>
-
-      <main className="max-w-3xl mx-auto px-6 py-20">
+      <div className="max-w-3xl mx-auto px-6 py-20">
         <h1 className="text-4xl md:text-5xl mb-8" style={{ fontFamily: "var(--font-title)" }}>Notre histoire</h1>
 
         <div className="space-y-6 text-base leading-relaxed" style={{ color: "var(--color-terre)" }}>
@@ -65,7 +56,7 @@ export default function APropos() {
             Découvrir nos créations
           </Link>
         </div>
-      </main>
+      </div>
     </>
   );
 }
